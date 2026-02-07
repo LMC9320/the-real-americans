@@ -1,6 +1,7 @@
 /* ============================================
    THE REAL AMERICANS - MVR STUDIOS
-   Main JavaScript — GSAP + Lenis
+   GTA 6 Inspired — GSAP + Lenis
+   Scroll-Scrub Video + Character Image Fly-in
    ============================================ */
 
 import '../styles/main.css';
@@ -10,7 +11,9 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ---- Lenis Smooth Scroll ---- */
+/* ============================================
+   LENIS SMOOTH SCROLL
+   ============================================ */
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -22,14 +25,12 @@ const lenis = new Lenis({
 });
 
 lenis.on('scroll', ScrollTrigger.update);
-
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-
+gsap.ticker.add((time) => { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 
-/* ---- Loader ---- */
+/* ============================================
+   LOADER
+   ============================================ */
 function initLoader() {
   const loader = document.getElementById('loader');
   const progress = loader.querySelector('.loader__progress');
@@ -51,7 +52,9 @@ function initLoader() {
   }, 120);
 }
 
-/* ---- Navigation ---- */
+/* ============================================
+   NAVIGATION
+   ============================================ */
 function initNav() {
   const nav = document.getElementById('nav');
   const hamburger = document.getElementById('hamburger');
@@ -60,22 +63,11 @@ function initNav() {
   let lastScrollY = 0;
   let ticking = false;
 
-  // Scroll-based nav styling
   lenis.on('scroll', ({ scroll }) => {
     if (!ticking) {
       requestAnimationFrame(() => {
-        if (scroll > 80) {
-          nav.classList.add('is-scrolled');
-        } else {
-          nav.classList.remove('is-scrolled');
-        }
-
-        if (scroll > lastScrollY && scroll > 400) {
-          nav.classList.add('is-hidden');
-        } else {
-          nav.classList.remove('is-hidden');
-        }
-
+        nav.classList.toggle('is-scrolled', scroll > 80);
+        nav.classList.toggle('is-hidden', scroll > lastScrollY && scroll > 400);
         lastScrollY = scroll;
         ticking = false;
       });
@@ -83,18 +75,12 @@ function initNav() {
     }
   });
 
-  // Hamburger toggle
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('is-open');
     mobileMenu.classList.toggle('is-open');
-    if (mobileMenu.classList.contains('is-open')) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
+    mobileMenu.classList.contains('is-open') ? lenis.stop() : lenis.start();
   });
 
-  // Nav link clicks
   navLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -109,8 +95,7 @@ function initNav() {
   });
 
   // Active section tracking
-  const sections = document.querySelectorAll('section[id]');
-  sections.forEach((section) => {
+  document.querySelectorAll('section[id]').forEach((section) => {
     ScrollTrigger.create({
       trigger: section,
       start: 'top center',
@@ -127,116 +112,150 @@ function initNav() {
   }
 }
 
-/* ---- Hero Animations ---- */
+/* ============================================
+   HERO ANIMATIONS
+   ============================================ */
 function initHeroAnimations() {
   const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-  tl.to('.hero__badge', {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    delay: 0.2,
-  })
-    .to(
-      '.hero__title-line--1',
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-      },
-      '-=0.4'
-    )
-    .to(
-      '.hero__title-line--2',
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-      },
-      '-=0.6'
-    )
-    .to(
-      '.hero__subtitle',
-      {
-        opacity: 1,
-        duration: 0.8,
-      },
-      '-=0.4'
-    )
-    .to(
-      '.hero__cta',
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-      },
-      '-=0.4'
-    )
-    .to(
-      '.hero__scroll-indicator',
-      {
-        opacity: 1,
-        duration: 0.6,
-      },
-      '-=0.2'
-    );
+  tl.to('.hero__badge', { opacity: 1, y: 0, duration: 0.8, delay: 0.2 })
+    .to('.hero__title-line--1', { opacity: 1, y: 0, duration: 1 }, '-=0.4')
+    .to('.hero__title-line--2', { opacity: 1, y: 0, duration: 1.2 }, '-=0.6')
+    .to('.hero__subtitle', { opacity: 1, duration: 0.8 }, '-=0.4')
+    .to('.hero__cta', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+    .to('.hero__scroll-indicator', { opacity: 1, duration: 0.6 }, '-=0.2');
 
-  // Parallax on hero elements
+  // Hero parallax on scroll
   gsap.to('.hero__title-line--1', {
     y: -50,
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1,
-    },
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
   });
-
   gsap.to('.hero__title-line--2', {
     y: -80,
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1,
-    },
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
   });
-
   gsap.to('.hero__badge', {
-    y: -30,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: '60% top',
-      scrub: 1,
-    },
+    y: -30, opacity: 0,
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: '60% top', scrub: 1 },
   });
-
   gsap.to('.hero__cta', {
-    y: -20,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: '50% top',
-      scrub: 1,
-    },
+    y: -20, opacity: 0,
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: '50% top', scrub: 1 },
   });
-
   gsap.to('.hero__dust', {
     y: -100,
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 2,
-    },
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 },
   });
 }
 
-/* ---- Synopsis Animations ---- */
+/* ============================================
+   MOUSE PARALLAX ON HERO
+   ============================================ */
+function initMouseParallax() {
+  const hero = document.querySelector('.hero');
+  const dust = document.querySelector('.hero__dust');
+  const gradient = document.querySelector('.hero__gradient');
+
+  hero.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    gsap.to(dust, { x: x * 20, y: y * 15, duration: 1.5, ease: 'power2.out' });
+    gsap.to(gradient, { x: x * -10, y: y * -8, duration: 2, ease: 'power2.out' });
+  });
+}
+
+/* ============================================
+   VIDEO SCRUB — GTA 6 STYLE
+   Pinned section, scroll maps to video.currentTime
+   Falls back to text scenes when no video source
+   ============================================ */
+function initVideoScrub() {
+  const video = document.querySelector('.video-scrub__video');
+  const container = document.querySelector('.video-scrub__container');
+  const fallback = document.querySelector('.video-scrub__fallback');
+  const scenes = document.querySelectorAll('.video-scrub__scene');
+  const ringFill = document.querySelector('.video-scrub__ring-fill');
+  const ringText = document.querySelector('.video-scrub__progress-text');
+  const circumference = 2 * Math.PI * 45; // r=45
+
+  const hasVideo = video && video.querySelector('source');
+
+  // Create the main scroll-scrub timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.video-scrub',
+      start: 'top top',
+      end: '+=200%',         // 200vh of scroll distance
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const p = self.progress;
+        // Update progress ring
+        if (ringFill) {
+          ringFill.style.strokeDashoffset = circumference - (p * circumference);
+        }
+        if (ringText) {
+          ringText.textContent = `${Math.round(p * 100)}%`;
+        }
+      },
+    },
+  });
+
+  if (hasVideo) {
+    // Real video scrub: map scroll to currentTime
+    video.classList.add('is-ready');
+    if (fallback) fallback.style.display = 'none';
+
+    video.addEventListener('loadedmetadata', () => {
+      tl.to(video, {
+        currentTime: video.duration,
+        duration: 3,
+        ease: 'power1.inOut',
+      });
+    });
+  } else {
+    // Fallback: animate through text scenes
+    if (video) video.style.display = 'none';
+
+    const totalScenes = scenes.length;
+    if (totalScenes > 0) {
+      scenes[0].classList.add('is-active');
+
+      // Scene 1: visible from 0% to 33%
+      tl.to({}, { duration: 1 }); // hold scene 1
+
+      // Crossfade to scene 2 at 33%
+      tl.call(() => {
+        scenes.forEach((s) => s.classList.remove('is-active'));
+        scenes[1].classList.add('is-active');
+      });
+      tl.from(scenes[1], { opacity: 0, scale: 0.95, duration: 0.5 });
+      tl.to({}, { duration: 0.8 }); // hold scene 2
+
+      // Crossfade to scene 3 at 66%
+      if (scenes[2]) {
+        tl.call(() => {
+          scenes.forEach((s) => s.classList.remove('is-active'));
+          scenes[2].classList.add('is-active');
+        });
+        tl.from(scenes[2], { opacity: 0, scale: 0.95, duration: 0.5 });
+        tl.to({}, { duration: 0.8 }); // hold scene 3
+      }
+    }
+  }
+
+  // Fade hero as video section enters
+  tl.to('.hero', { opacity: 0, duration: 0.5, ease: 'power1.inOut' }, 0);
+}
+
+/* ============================================
+   SYNOPSIS ANIMATIONS
+   ============================================ */
 function initSynopsis() {
+  // Pull synopsis up slightly to overlap
+  gsap.set('.synopsis', { marginTop: '-10vh' });
+
   const synopsisTl = gsap.timeline({
     scrollTrigger: {
       trigger: '.synopsis',
@@ -247,359 +266,168 @@ function initSynopsis() {
   });
 
   synopsisTl
-    .from('.synopsis__video-frame', {
-      x: -60,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-    })
-    .from(
-      '.synopsis__title',
-      {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      },
-      '-=0.6'
-    )
-    .from(
-      '.synopsis__description',
-      {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      },
-      '-=0.5'
-    )
-    .from(
-      '.synopsis__detail',
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.15,
-        ease: 'power3.out',
-      },
-      '-=0.4'
-    );
-
-  // Trailers reveal
-  gsap.from('.synopsis__trailer-card', {
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.synopsis__trailers',
-      start: 'top 75%',
-      toggleActions: 'play none none reverse',
-    },
-  });
+    .from('.synopsis__title', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' })
+    .from('.synopsis__description', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .from('.synopsis__detail', { y: 20, opacity: 0, duration: 0.5, stagger: 0.15, ease: 'power3.out' }, '-=0.4')
+    .from('.synopsis__video-frame', { x: 60, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
 }
 
-/* ---- Characters Section — GTA 6 Style Horizontal Scroll ---- */
+/* ============================================
+   CHARACTERS — GTA 6 STYLE
+   Image fly-ins + parallax on img-box
+   ============================================ */
 function initCharacters() {
-  const carousel = document.querySelector('.characters__carousel');
-  const cards = document.querySelectorAll('.character-card');
-  const progressBar = document.querySelector('.characters__progress-bar');
-  const totalCards = cards.length;
+  // Characters intro header
+  gsap.from('.characters-intro__title', {
+    y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.characters-intro', start: 'top 75%', toggleActions: 'play none none reverse' },
+  });
+  gsap.from('.characters-intro__sub', {
+    y: 30, opacity: 0, duration: 0.8, delay: 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '.characters-intro', start: 'top 75%', toggleActions: 'play none none reverse' },
+  });
 
-  if (totalCards === 0) return;
+  // Each character section
+  const charSections = document.querySelectorAll('.char-section');
 
-  // GSAP horizontal scroll pinned section
-  const scrollWidth = carousel.scrollWidth - window.innerWidth;
+  charSections.forEach((section) => {
+    const text = section.querySelector('.char-section__text');
+    const imgBox = section.querySelector('.char-section__images');
+    const flyInImages = section.querySelectorAll('[class*="img--from-"]');
+    const role = section.querySelector('.char-section__role');
+    const name = section.querySelector('.char-section__name');
+    const bio = section.querySelector('.char-section__bio');
+    const animNote = section.querySelector('.char-section__anim-note');
 
-  const charactersTl = gsap.to(carousel, {
-    x: () => -scrollWidth,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.characters',
-      start: 'top top',
-      end: () => `+=${scrollWidth}`,
-      pin: true,
-      scrub: 1,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        progressBar.style.width = `${(progress * 100)}%`;
-
-        // Animate cards as they come into view
-        cards.forEach((card, i) => {
-          const cardProgress = (progress * totalCards) - i;
-          if (cardProgress > -0.5 && cardProgress < 1.5) {
-            gsap.to(card.querySelector('.character-card__info'), {
-              opacity: 1,
-              x: 0,
-              duration: 0.4,
-              ease: 'power2.out',
-            });
-            gsap.to(card.querySelector('.character-card__image'), {
-              scale: 1,
-              opacity: 1,
-              duration: 0.5,
-              ease: 'power2.out',
-            });
-          } else {
-            gsap.to(card.querySelector('.character-card__info'), {
-              opacity: 0.3,
-              x: cardProgress < 0 ? -30 : 30,
-              duration: 0.4,
-            });
-            gsap.to(card.querySelector('.character-card__image'), {
-              scale: 0.9,
-              opacity: 0.5,
-              duration: 0.4,
-            });
-          }
-        });
+    // === Text reveal timeline ===
+    const textTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        end: 'top 25%',
+        toggleActions: 'play none none reverse',
       },
-    },
-  });
+    });
 
-  // Individual card parallax within horizontal scroll
-  cards.forEach((card) => {
-    const image = card.querySelector('.character-card__image-wrapper');
-    const info = card.querySelector('.character-card__info');
+    if (role) textTl.from(role, { y: 20, opacity: 0, duration: 0.5, ease: 'power3.out' });
+    if (name) textTl.from(name, { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3');
+    if (bio) textTl.from(bio, { y: 30, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+    if (animNote) textTl.from(animNote, { y: 20, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3');
 
-    // Slight parallax offset between image and text
-    gsap.set(info, { opacity: 0.3, x: 30 });
-    gsap.set(card.querySelector('.character-card__image'), { scale: 0.9, opacity: 0.5 });
-  });
+    // === Image fly-ins (scrubbed to scroll) ===
+    flyInImages.forEach((img) => {
+      gsap.to(img, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'expo.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          end: 'center center',
+          scrub: 1,
+        },
+      });
+    });
 
-  // Characters header reveal
-  gsap.from('.characters__header .section-title', {
-    y: 60,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.characters',
-      start: 'top 70%',
-      toggleActions: 'play none none reverse',
-    },
-  });
+    // === Parallax on img-box (GTA 6 pattern) ===
+    if (imgBox) {
+      gsap.to(imgBox, {
+        y: -300,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top center',
+          end: '80% center',
+          scrub: 2,
+        },
+      });
+    }
 
-  gsap.from('.characters__subtitle', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.characters',
-      start: 'top 70%',
-      toggleActions: 'play none none reverse',
-    },
+    // === Background glow pulse on enter ===
+    const bg = section.querySelector('.char-section__bg');
+    if (bg) {
+      gsap.to(bg, {
+        opacity: 0.12,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 60%',
+          end: 'bottom 40%',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    }
   });
 }
 
-/* ---- World Section Animations ---- */
+/* ============================================
+   WORLD SECTION
+   ============================================ */
 function initWorld() {
-  // Header
   gsap.from('.world__header .section-title', {
-    y: 60,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.world',
-      start: 'top 70%',
-      toggleActions: 'play none none reverse',
-    },
+    y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.world', start: 'top 70%', toggleActions: 'play none none reverse' },
   });
-
   gsap.from('.world__subtitle', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.world',
-      start: 'top 70%',
-      toggleActions: 'play none none reverse',
-    },
+    y: 30, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out',
+    scrollTrigger: { trigger: '.world', start: 'top 70%', toggleActions: 'play none none reverse' },
   });
 
-  // Location cards with parallax
-  const locations = document.querySelectorAll('.world__location');
-  locations.forEach((location, i) => {
+  document.querySelectorAll('.world__location').forEach((location, i) => {
     const content = location.querySelector('.world__location-content');
     const image = location.querySelector('.world__location-image');
     const isEven = i % 2 === 1;
 
     gsap.to(location, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: location,
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-      },
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: location, start: 'top 75%', toggleActions: 'play none none reverse' },
     });
-
-    // Parallax within each location
     gsap.from(content, {
-      x: isEven ? 60 : -60,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: location,
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
+      x: isEven ? 60 : -60, opacity: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: location, start: 'top 70%', toggleActions: 'play none none reverse' },
     });
-
     gsap.from(image, {
-      x: isEven ? -60 : 60,
-      opacity: 0,
-      duration: 1,
-      delay: 0.15,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: location,
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
+      x: isEven ? -60 : 60, opacity: 0, duration: 1, delay: 0.15, ease: 'power3.out',
+      scrollTrigger: { trigger: location, start: 'top 70%', toggleActions: 'play none none reverse' },
     });
-
-    // Parallax scroll movement
     gsap.to(image, {
       y: -30,
-      scrollTrigger: {
-        trigger: location,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.5,
-      },
+      scrollTrigger: { trigger: location, start: 'top bottom', end: 'bottom top', scrub: 1.5 },
     });
   });
 }
 
-/* ---- Scroll Story Section — Pinned Panels ---- */
-function initScrollStory() {
-  const panels = document.querySelectorAll('.scroll-story__panel');
-  const totalPanels = panels.length;
+/* ============================================
+   FINAL CTA
+   ============================================ */
+function initFinalCTA() {
+  const cta = document.querySelector('.final-cta');
+  if (!cta) return;
 
-  // Pin the section
-  ScrollTrigger.create({
-    trigger: '.scroll-story',
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: '.scroll-story__pin-wrapper',
-    pinSpacing: false,
+  gsap.from('.final-cta__line1', {
+    y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: cta, start: 'top 70%', toggleActions: 'play none none reverse' },
   });
-
-  // Animate panels based on scroll progress
-  panels.forEach((panel, i) => {
-    const panelStart = i / totalPanels;
-    const panelEnd = (i + 1) / totalPanels;
-
-    ScrollTrigger.create({
-      trigger: '.scroll-story',
-      start: `${panelStart * 100}% top`,
-      end: `${panelEnd * 100}% top`,
-      onEnter: () => activatePanel(i),
-      onEnterBack: () => activatePanel(i),
-      onLeave: () => {
-        if (i < totalPanels - 1) deactivatePanel(i);
-      },
-      onLeaveBack: () => {
-        if (i > 0) deactivatePanel(i);
-      },
-    });
+  gsap.from('.final-cta__line2', {
+    y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: cta, start: 'top 70%', toggleActions: 'play none none reverse' },
   });
-
-  function activatePanel(index) {
-    panels.forEach((p, i) => {
-      if (i === index) {
-        p.classList.add('is-active');
-        animatePanelIn(p);
-      } else {
-        p.classList.remove('is-active');
-      }
-    });
-  }
-
-  function deactivatePanel(index) {
-    panels[index].classList.remove('is-active');
-  }
-
-  function animatePanelIn(panel) {
-    const tag = panel.querySelector('.scroll-story__panel-tag');
-    const titles = panel.querySelectorAll('.scroll-story__panel-title');
-    const text = panel.querySelector('.scroll-story__panel-text');
-    const cta = panel.querySelector('.scroll-story__cta');
-    const logo = panel.querySelector('.scroll-story__final-logo');
-
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    if (tag) {
-      tl.from(tag, { y: 20, opacity: 0, duration: 0.5 });
-    }
-
-    if (logo) {
-      tl.from(logo.children, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-      }, tag ? '-=0.2' : 0);
-    }
-
-    if (titles.length > 0) {
-      tl.from(
-        titles,
-        {
-          y: 40,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.2,
-        },
-        tag ? '-=0.3' : 0
-      );
-    }
-
-    if (text) {
-      tl.from(
-        text,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-        },
-        '-=0.3'
-      );
-    }
-
-    if (cta) {
-      tl.from(
-        cta,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.5,
-        },
-        '-=0.2'
-      );
-    }
-  }
-
-  // Make panel 1 active initially
-  panels[0].classList.add('is-active');
+  gsap.from('.final-cta__tagline', {
+    y: 20, opacity: 0, duration: 0.6, delay: 0.3, ease: 'power3.out',
+    scrollTrigger: { trigger: cta, start: 'top 70%', toggleActions: 'play none none reverse' },
+  });
+  gsap.from('.final-cta__btn', {
+    y: 20, opacity: 0, duration: 0.5, delay: 0.5, ease: 'power3.out',
+    scrollTrigger: { trigger: cta, start: 'top 70%', toggleActions: 'play none none reverse' },
+  });
 }
 
-/* ---- Back to Top Button ---- */
+/* ============================================
+   BACK TO TOP
+   ============================================ */
 function initBackToTop() {
-  const btns = document.querySelectorAll('a[href="#hero"]');
-  btns.forEach((btn) => {
+  document.querySelectorAll('a[href="#hero"]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       lenis.scrollTo('#hero', { offset: 0 });
@@ -607,45 +435,20 @@ function initBackToTop() {
   });
 }
 
-/* ---- Mouse Parallax on Hero ---- */
-function initMouseParallax() {
-  const hero = document.querySelector('.hero');
-  const dust = document.querySelector('.hero__dust');
-  const gradient = document.querySelector('.hero__gradient');
-
-  hero.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const x = (clientX / window.innerWidth - 0.5) * 2;
-    const y = (clientY / window.innerHeight - 0.5) * 2;
-
-    gsap.to(dust, {
-      x: x * 20,
-      y: y * 15,
-      duration: 1.5,
-      ease: 'power2.out',
-    });
-
-    gsap.to(gradient, {
-      x: x * -10,
-      y: y * -8,
-      duration: 2,
-      ease: 'power2.out',
-    });
-  });
-}
-
-/* ---- Initialize Everything ---- */
+/* ============================================
+   INIT
+   ============================================ */
 function init() {
   initLoader();
   initNav();
   initMouseParallax();
 
-  // Wait a tick for DOM to settle
   requestAnimationFrame(() => {
+    initVideoScrub();
     initSynopsis();
     initCharacters();
     initWorld();
-    initScrollStory();
+    initFinalCTA();
     initBackToTop();
   });
 }
@@ -654,9 +457,7 @@ function init() {
 let resizeTimeout;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    ScrollTrigger.refresh();
-  }, 250);
+  resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 250);
 });
 
 // GO

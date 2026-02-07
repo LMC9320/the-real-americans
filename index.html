@@ -39,7 +39,6 @@
       <a href="#synopsis" class="nav__link" data-section="synopsis">Synopsis</a>
       <a href="#characters" class="nav__link" data-section="characters">Characters</a>
       <a href="#world" class="nav__link" data-section="world">World</a>
-      <a href="#scroll-story" class="nav__link" data-section="scroll-story">Story</a>
     </div>
     <div class="nav__hamburger" id="hamburger">
       <span></span>
@@ -54,11 +53,11 @@
     <a href="#synopsis" class="mobile-menu__link" data-section="synopsis">Synopsis</a>
     <a href="#characters" class="mobile-menu__link" data-section="characters">Characters</a>
     <a href="#world" class="mobile-menu__link" data-section="world">World</a>
-    <a href="#scroll-story" class="mobile-menu__link" data-section="scroll-story">Story</a>
   </div>
 
   <main id="smooth-wrapper">
-    <!-- HERO SECTION -->
+
+    <!-- ============ HERO SECTION ============ -->
     <section id="hero" class="hero">
       <div class="hero__bg">
         <div class="hero__gradient"></div>
@@ -74,7 +73,7 @@
         </h1>
         <p class="hero__subtitle">A SHOW ABOUT COUNTRY BUMPKINS READY FOR MARKET</p>
         <div class="hero__cta">
-          <a href="#synopsis" class="btn btn--primary">Watch Trailer</a>
+          <a href="#video-scrub" class="btn btn--primary">Watch Trailer</a>
           <a href="#characters" class="btn btn--outline">Meet the Badgers</a>
         </div>
       </div>
@@ -84,24 +83,51 @@
       </div>
     </section>
 
-    <!-- SYNOPSIS SECTION -->
+    <!-- ============ VIDEO SCRUB SECTION ============ -->
+    <section id="video-scrub" class="video-scrub">
+      <div class="video-scrub__container">
+        <!-- Placeholder canvas for scroll-scrub (replace with actual video) -->
+        <video
+          class="video-scrub__video"
+          muted
+          playsinline
+          preload="auto"
+        >
+          <!-- Drop your trailer MP4 here: <source src="/videos/trailer.mp4" type="video/mp4" /> -->
+        </video>
+        <!-- Fallback animated gradient when no video is present -->
+        <div class="video-scrub__fallback">
+          <div class="video-scrub__fallback-inner">
+            <div class="video-scrub__scene video-scrub__scene--1">
+              <span class="video-scrub__scene-tag">THE MARTIANS WON.</span>
+              <span class="video-scrub__scene-title">EARTH IS LOST.</span>
+              <span class="video-scrub__scene-sub">BUT NOBODY TOLD...</span>
+            </div>
+            <div class="video-scrub__scene video-scrub__scene--2">
+              <span class="video-scrub__scene-tag">THE FAMILY</span>
+              <span class="video-scrub__scene-title">THE BADGERS</span>
+            </div>
+            <div class="video-scrub__scene video-scrub__scene--3">
+              <span class="video-scrub__scene-tag">ROUGHNECK ACRES</span>
+              <span class="video-scrub__scene-title">EARTH'S LAST STAND</span>
+              <span class="video-scrub__scene-sub">Humanity's most unlikely heroes.</span>
+            </div>
+          </div>
+          <div class="video-scrub__progress-ring">
+            <svg viewBox="0 0 100 100">
+              <circle class="video-scrub__ring-bg" cx="50" cy="50" r="45" />
+              <circle class="video-scrub__ring-fill" cx="50" cy="50" r="45" />
+            </svg>
+            <span class="video-scrub__progress-text">0%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SYNOPSIS SECTION ============ -->
     <section id="synopsis" class="synopsis">
       <div class="synopsis__bg"></div>
       <div class="synopsis__container">
-        <div class="synopsis__video-wrapper">
-          <div class="synopsis__video-frame">
-            <div class="synopsis__play-btn" id="play-btn">
-              <svg viewBox="0 0 80 80" fill="none">
-                <circle cx="40" cy="40" r="39" stroke="white" stroke-width="2"/>
-                <path d="M32 24L56 40L32 56V24Z" fill="white"/>
-              </svg>
-            </div>
-            <div class="synopsis__video-placeholder">
-              <div class="synopsis__video-gradient"></div>
-              <span class="synopsis__video-label">TRAILER</span>
-            </div>
-          </div>
-        </div>
         <div class="synopsis__text">
           <h2 class="section-title synopsis__title">SYNOPSIS</h2>
           <p class="synopsis__description">
@@ -124,275 +150,331 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Trailer Videos Section -->
-      <div class="synopsis__trailers">
-        <h3 class="synopsis__trailers-title">SNEAK PEEKS</h3>
-        <div class="synopsis__trailers-grid">
-          <div class="synopsis__trailer-card">
-            <div class="synopsis__trailer-thumb">
-              <div class="synopsis__trailer-overlay">
-                <svg viewBox="0 0 60 60" fill="none" width="60" height="60">
-                  <circle cx="30" cy="30" r="29" stroke="white" stroke-width="2"/>
-                  <path d="M24 18L44 30L24 42V18Z" fill="white"/>
-                </svg>
-              </div>
-              <span class="synopsis__trailer-label">TEASER 1</span>
+        <div class="synopsis__video-wrapper">
+          <div class="synopsis__video-frame">
+            <div class="synopsis__play-btn" id="play-btn">
+              <svg viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="39" stroke="white" stroke-width="2"/>
+                <path d="M32 24L56 40L32 56V24Z" fill="white"/>
+              </svg>
             </div>
-            <p class="synopsis__trailer-name">First Look</p>
-          </div>
-          <div class="synopsis__trailer-card">
-            <div class="synopsis__trailer-thumb">
-              <div class="synopsis__trailer-overlay">
-                <svg viewBox="0 0 60 60" fill="none" width="60" height="60">
-                  <circle cx="30" cy="30" r="29" stroke="white" stroke-width="2"/>
-                  <path d="M24 18L44 30L24 42V18Z" fill="white"/>
-                </svg>
-              </div>
-              <span class="synopsis__trailer-label">TEASER 2</span>
+            <div class="synopsis__video-placeholder">
+              <div class="synopsis__video-gradient"></div>
+              <span class="synopsis__video-label">TRAILER</span>
             </div>
-            <p class="synopsis__trailer-name">Meet the Family</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CHARACTERS SECTION - GTA 6 STYLE -->
-    <section id="characters" class="characters">
-      <div class="characters__header">
-        <h2 class="section-title">MEET THE BADGERS</h2>
-        <p class="characters__subtitle">Scroll to explore the family</p>
-      </div>
+    <!-- ============ CHARACTERS HEADER ============ -->
+    <section id="characters" class="characters-intro">
+      <h2 class="section-title characters-intro__title">MEET THE BADGERS</h2>
+      <p class="characters-intro__sub">The family that fights together, survives together. Scroll to meet each member.</p>
+    </section>
 
-      <div class="characters__carousel-wrapper">
-        <div class="characters__carousel">
-
-          <!-- Coodles -->
-          <div class="character-card" data-character="coodles">
-            <div class="character-card__bg" style="--accent: #ff6b9d"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="coodles">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #ff6b9d 0%, #c94b7a 100%);">
-                  <span>COODLES</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">SMILING BADASS SIS</span>
-              <h3 class="character-card__name">Coodles</h3>
-              <p class="character-card__bio">
-                Sweet smile, dead eyes, danger kink. Treats every Martian firefight like it's content
-                for her nonexistent TikTok channel. She's a natural-born assassin with the attention
-                span of a teenager, which is exactly as terrifying as it sounds.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Smile holds a beat too long. Alien blood slowly drips in background.</span>
-              </div>
+    <!-- ============ CHARACTER: COODLES ============ -->
+    <section class="char-section" data-character="coodles" style="--accent: #ff6b9d; --accent-dark: #c94b7a;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">SMILING BADASS SIS</span>
+          <h3 class="char-section__name">Coodles</h3>
+          <p class="char-section__bio">
+            Sweet smile, dead eyes, danger kink. Treats every Martian firefight like it's content
+            for her nonexistent TikTok channel. She's a natural-born assassin with the attention
+            span of a teenager, which is exactly as terrifying as it sounds.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Smile holds a beat too long. Alien blood slowly drips in background.</span>
+          </div>
+          <!-- Inline image (text-side) -->
+          <div class="char-section__inline-img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #ff6b9d 0%, #c94b7a 100%); aspect-ratio: 4/3;">
+              <span>Mid-firefight selfie pose</span>
             </div>
           </div>
-
-          <!-- Jimbo Jr -->
-          <div class="character-card" data-character="jimbo-jr">
-            <div class="character-card__bg" style="--accent: #4a9eff"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="jimbo-jr">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #4a9eff 0%, #2d6bc4 100%);">
-                  <span>JIMBO JR</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">HOTHEAD OLDER BRO</span>
-              <h3 class="character-card__name">Jimbo Jr</h3>
-              <p class="character-card__bio">
-                The reluctant leader. Smart enough to see disaster coming, unlucky enough to be related
-                to everyone causing it. His dream is to just keep the family alive, which in this galactic
-                clusterfuck basically makes him a hero. The last sane man in a family of live grenades.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Long sigh / face rub. Explosion flares behind him, he doesn't react.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Jimbob -->
-          <div class="character-card" data-character="jimbob">
-            <div class="character-card__bg" style="--accent: #ff8c42"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="jimbob">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #ff8c42 0%, #c4692d 100%);">
-                  <span>JIMBOB</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">MEATHEAD DAD</span>
-              <h3 class="character-card__name">Jimbob</h3>
-              <p class="character-card__bio">
-                Built like a tank, thinks like a toaster. A fearless mechanic who puts rocket launchers
-                on lawnmowers and calls it "innovation." His solution to every problem is "make it
-                explode bigger." He's the family's muscle and disaster artist.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Chest rising and falling as he snores. Small creature tail flicks out of his mouth.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Granny Betty -->
-          <div class="character-card" data-character="granny-betty">
-            <div class="character-card__bg" style="--accent: #e85d75"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="granny-betty">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #e85d75 0%, #b8445a 100%);">
-                  <span>GRANNY BETTY</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">BOOMER KAREN</span>
-              <h3 class="character-card__name">Granny Betty</h3>
-              <p class="character-card__bio">
-                Granny Betty is the Badger family matriarch and owner of Betty's Bar, the trailer-park
-                saloon that doubles as war room and bomb factory. She's equal parts warm grandmother
-                and unhinged bouncer, just as likely to serve chili as she is to upside your head with a wrench.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Punch lands, alien snaps sideways. She straightens an item on the bar immediately after.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pappy Merle -->
-          <div class="character-card" data-character="pappy-merle">
-            <div class="character-card__bg" style="--accent: #8b6914"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="pappy-merle">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #8b6914 0%, #6b5010 100%);">
-                  <span>PAPPY MERLE</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">CONSPIRACY GRANDPA</span>
-              <h3 class="character-card__name">Pappy Merle</h3>
-              <p class="character-card__bio">
-                Moonshine brewer. Self-proclaimed Martian abductee. Wears a sack over his head because
-                "you don't wanna see what they did to my gorgeous face." His moonshine doubles as napalm,
-                and he's always one swig away from cracking the whole conspiracy wide open.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Beer wobbles but never spills. Moonshine bubbles glow faintly.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pete Perez -->
-          <div class="character-card" data-character="pete-perez">
-            <div class="character-card__bg" style="--accent: #9b59b6"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="pete-perez">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #9b59b6 0%, #7d3f94 100%);">
-                  <span>PETE PEREZ</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">ANGRY WEAPONS NERD</span>
-              <h3 class="character-card__name">Pete Perez</h3>
-              <p class="character-card__bio">
-                Adopted sister. Weapons genius. Permanently pissed off. Pete trusts guns more than people
-                and fixes both by hitting them harder. Ride-or-die Badger, unless she's busy fighting
-                with her on-again, off-again Martian ex.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Pete crouched, quietly petting a small alien creature. Off-screen noise — she snaps furious.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Susan -->
-          <div class="character-card" data-character="susan">
-            <div class="character-card__bg" style="--accent: #2ecc71"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="susan">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #2ecc71 0%, #229954 100%);">
-                  <span>SUSAN</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">DRUNK ALIEN LIABILITY</span>
-              <h3 class="character-card__name">Susan</h3>
-              <p class="character-card__bio">
-                Martian defector with a liquor bottle lodged in his brain. Sometimes the team's secret
-                weapon, sometimes their biggest mistake. Nobody, including Susan, knows which version
-                is showing up today.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Eyes flicker between calm and murderous.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tiberius Zorillo -->
-          <div class="character-card" data-character="tiberius">
-            <div class="character-card__bg" style="--accent: #f39c12"></div>
-            <div class="character-card__image-wrapper">
-              <div class="character-card__image" data-placeholder="tiberius">
-                <div class="character-card__image-placeholder" style="background: linear-gradient(135deg, #f39c12 0%, #d4860e 100%);">
-                  <span>TIBERIUS</span>
-                </div>
-              </div>
-              <div class="character-card__image-accent"></div>
-            </div>
-            <div class="character-card__info">
-              <span class="character-card__role">DO NOT PET</span>
-              <h3 class="character-card__name">Tiberius Zorillo</h3>
-              <p class="character-card__bio">
-                A genetically engineered skunk and failed Martian experiment. Genius tactician, poet,
-                and walking war crime. Looks adorable. Smells like the end of the world.
-              </p>
-              <div class="character-card__animation-note">
-                <span class="character-card__animation-icon">▶</span>
-                <span>Tiny stink puff → screen briefly fogs.</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
-
-      <div class="characters__progress">
-        <div class="characters__progress-bar"></div>
-      </div>
-      <div class="characters__nav-hint">
-        <span>← DRAG OR SCROLL →</span>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #ff6b9d 0%, #a8325e 100%); aspect-ratio: 3/4;">
+              <span>Coodles smelling apple pie</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #d44b7a 0%, #ff6b9d 100%); aspect-ratio: 4/3;">
+              <span>Kiddie pool of alien slime</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- WORLD SECTION -->
+    <!-- ============ CHARACTER: JIMBO JR ============ -->
+    <section class="char-section char-section--reverse" data-character="jimbo-jr" style="--accent: #4a9eff; --accent-dark: #2d6bc4;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">HOTHEAD OLDER BRO</span>
+          <h3 class="char-section__name">Jimbo Jr</h3>
+          <p class="char-section__bio">
+            The reluctant leader. Smart enough to see disaster coming, unlucky enough to be related
+            to everyone causing it. His dream is to just keep the family alive, which in this galactic
+            clusterfuck basically makes him a hero. The last sane man in a family of live grenades.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Long sigh / face rub. Explosion flares behind him, he doesn't react.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #4a9eff 0%, #2d6bc4 100%); aspect-ratio: 4/3;">
+              <span>Holding a burning battle plan</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #4a9eff 0%, #1a4faa 100%); aspect-ratio: 3/4;">
+              <span>Arms crossed, explosions behind</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #2d6bc4 0%, #4a9eff 100%); aspect-ratio: 4/3;">
+              <span>Shielding the family</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: JIMBOB ============ -->
+    <section class="char-section" data-character="jimbob" style="--accent: #ff8c42; --accent-dark: #c4692d;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">MEATHEAD DAD</span>
+          <h3 class="char-section__name">Jimbob</h3>
+          <p class="char-section__bio">
+            Built like a tank, thinks like a toaster. A fearless mechanic who puts rocket launchers
+            on lawnmowers and calls it "innovation." His solution to every problem is "make it
+            explode bigger." He's the family's muscle and disaster artist.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Chest rising and falling as he snores. Small creature tail flicks out of his mouth.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #ff8c42 0%, #c4692d 100%); aspect-ratio: 4/3;">
+              <span>Welding alien tech, zero safety</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #ff8c42 0%, #a85520 100%); aspect-ratio: 3/4;">
+              <span>Asleep, alien in his mouth</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #c4692d 0%, #ff8c42 100%); aspect-ratio: 4/3;">
+              <span>Rocket-launcher lawnmower</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: GRANNY BETTY ============ -->
+    <section class="char-section char-section--reverse" data-character="granny-betty" style="--accent: #e85d75; --accent-dark: #b8445a;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">BOOMER KAREN</span>
+          <h3 class="char-section__name">Granny Betty</h3>
+          <p class="char-section__bio">
+            Granny Betty is the Badger family matriarch and owner of Betty's Bar, the trailer-park
+            saloon that doubles as war room and bomb factory. She's equal parts warm grandmother
+            and unhinged bouncer, just as likely to serve chili as she is to upside your head with a wrench.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Punch lands, alien snaps sideways. She straightens an item on the bar immediately after.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #e85d75 0%, #b8445a 100%); aspect-ratio: 4/3;">
+              <span>Wiping counter, bodies on floor</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #e85d75 0%, #8a2240 100%); aspect-ratio: 3/4;">
+              <span>Mid-punch, smiling politely</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #b8445a 0%, #e85d75 100%); aspect-ratio: 4/3;">
+              <span>Behind the bar, armed to teeth</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: PAPPY MERLE ============ -->
+    <section class="char-section" data-character="pappy-merle" style="--accent: #c9a227; --accent-dark: #8b6914;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">CONSPIRACY GRANDPA</span>
+          <h3 class="char-section__name">Pappy Merle</h3>
+          <p class="char-section__bio">
+            Moonshine brewer. Self-proclaimed Martian abductee. Wears a sack over his head because
+            "you don't wanna see what they did to my gorgeous face." His moonshine doubles as napalm,
+            and he's always one swig away from cracking the whole conspiracy wide open.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Beer wobbles but never spills. Moonshine bubbles glow faintly.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #c9a227 0%, #8b6914 100%); aspect-ratio: 4/3;">
+              <span>Moonshine into weapon: DO NOT DRINK</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #c9a227 0%, #6b5010 100%); aspect-ratio: 3/4;">
+              <span>Passed out, beer balanced on belly</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #8b6914 0%, #c9a227 100%); aspect-ratio: 4/3;">
+              <span>Sack-headed beside alien still</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: PETE PEREZ ============ -->
+    <section class="char-section char-section--reverse" data-character="pete-perez" style="--accent: #9b59b6; --accent-dark: #7d3f94;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">ANGRY WEAPONS NERD</span>
+          <h3 class="char-section__name">Pete Perez</h3>
+          <p class="char-section__bio">
+            Adopted sister. Weapons genius. Permanently pissed off. Pete trusts guns more than people
+            and fixes both by hitting them harder. Ride-or-die Badger, unless she's busy fighting
+            with her on-again, off-again Martian ex.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Pete crouched, quietly petting a small alien creature. Off-screen noise — she snaps furious.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #9b59b6 0%, #7d3f94 100%); aspect-ratio: 4/3;">
+              <span>Nose-to-nose with a Martian</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #9b59b6 0%, #5b2d78 100%); aspect-ratio: 3/4;">
+              <span>Arms crossed, scowl locked in</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #7d3f94 0%, #9b59b6 100%); aspect-ratio: 4/3;">
+              <span>Pete & Susan back-to-back</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: SUSAN ============ -->
+    <section class="char-section" data-character="susan" style="--accent: #2ecc71; --accent-dark: #229954;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">DRUNK ALIEN LIABILITY</span>
+          <h3 class="char-section__name">Susan</h3>
+          <p class="char-section__bio">
+            Martian defector with a liquor bottle lodged in his brain. Sometimes the team's secret
+            weapon, sometimes their biggest mistake. Nobody, including Susan, knows which version
+            is showing up today.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Eyes flicker between calm and murderous.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #2ecc71 0%, #229954 100%); aspect-ratio: 4/3;">
+              <span>Activating ancient Martian tech</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #2ecc71 0%, #176f3d 100%); aspect-ratio: 3/4;">
+              <span>Drinking, circuitry glowing</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #229954 0%, #2ecc71 100%); aspect-ratio: 4/3;">
+              <span>Confused amid explosions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTER: TIBERIUS ============ -->
+    <section class="char-section char-section--reverse" data-character="tiberius" style="--accent: #f39c12; --accent-dark: #d4860e;">
+      <div class="char-section__bg"></div>
+      <div class="char-section__content">
+        <div class="char-section__text">
+          <span class="char-section__role">DO NOT PET</span>
+          <h3 class="char-section__name">Tiberius Zorillo</h3>
+          <p class="char-section__bio">
+            A genetically engineered skunk and failed Martian experiment. Genius tactician, poet,
+            and walking war crime. Looks adorable. Smells like the end of the world.
+          </p>
+          <div class="char-section__anim-note">
+            <span class="char-section__anim-icon">&#9654;</span>
+            <span>Tiny stink puff &rarr; screen briefly fogs.</span>
+          </div>
+          <div class="char-section__inline-img char-section__img--from-right">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #f39c12 0%, #d4860e 100%); aspect-ratio: 4/3;">
+              <span>Badgers covering their noses</span>
+            </div>
+          </div>
+        </div>
+        <div class="char-section__images img-box">
+          <div class="char-section__img char-section__img--from-left">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #f39c12 0%, #a06b08 100%); aspect-ratio: 3/4;">
+              <span>Cute, innocent Tiberius</span>
+            </div>
+          </div>
+          <div class="char-section__img char-section__img--from-bottom">
+            <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #d4860e 0%, #f39c12 100%); aspect-ratio: 4/3;">
+              <span>Battlefield destroyed behind him</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORLD SECTION ============ -->
     <section id="world" class="world">
       <div class="world__header">
         <h2 class="section-title">THE WORLD</h2>
-        <p class="world__subtitle">Key Locations & Battlegrounds</p>
+        <p class="world__subtitle">Key Locations &amp; Battlegrounds</p>
       </div>
-
       <div class="world__locations">
         <div class="world__location" data-location="bettys-bar">
           <div class="world__location-bg" style="background: linear-gradient(135deg, #8B4513 0%, #2c1810 100%);"></div>
@@ -409,7 +491,6 @@
             </div>
           </div>
         </div>
-
         <div class="world__location" data-location="roughneck-acres">
           <div class="world__location-bg" style="background: linear-gradient(135deg, #c1440e 0%, #3d1a0a 100%);"></div>
           <div class="world__location-content">
@@ -425,7 +506,6 @@
             </div>
           </div>
         </div>
-
         <div class="world__location" data-location="martian-front">
           <div class="world__location-bg" style="background: linear-gradient(135deg, #1a3a2a 0%, #0d1f17 100%);"></div>
           <div class="world__location-content">
@@ -444,59 +524,19 @@
       </div>
     </section>
 
-    <!-- SCROLL STORY SECTION -->
-    <section id="scroll-story" class="scroll-story">
-      <div class="scroll-story__pin-wrapper">
-        <div class="scroll-story__bg-layer"></div>
-        <div class="scroll-story__content">
-          <div class="scroll-story__panel scroll-story__panel--1">
-            <div class="scroll-story__panel-inner">
-              <span class="scroll-story__panel-tag">THE PREMISE</span>
-              <h3 class="scroll-story__panel-title">THE MARTIANS WON.</h3>
-              <h3 class="scroll-story__panel-title scroll-story__panel-title--sub">EARTH IS LOST.</h3>
-              <p class="scroll-story__panel-text">BUT NOBODY TOLD...</p>
-            </div>
-          </div>
-
-          <div class="scroll-story__panel scroll-story__panel--2">
-            <div class="scroll-story__panel-inner">
-              <span class="scroll-story__panel-tag">THE FAMILY</span>
-              <h3 class="scroll-story__panel-title">THE BADGERS</h3>
-              <p class="scroll-story__panel-text">
-                A family of armed-to-the-teeth rednecks who missed the memo about Earth's surrender.
-                Now they're the only ones fighting back.
-              </p>
-            </div>
-          </div>
-
-          <div class="scroll-story__panel scroll-story__panel--3">
-            <div class="scroll-story__panel-inner">
-              <span class="scroll-story__panel-tag">THE MISSION</span>
-              <h3 class="scroll-story__panel-title">EVERYTHING THEY EVER HEARD IS TRUE</h3>
-              <p class="scroll-story__panel-text">
-                Aliens are real. The government knew. And the only thing standing between humanity
-                and total annihilation is a family that puts rocket launchers on lawnmowers.
-              </p>
-            </div>
-          </div>
-
-          <div class="scroll-story__panel scroll-story__panel--4">
-            <div class="scroll-story__panel-inner">
-              <div class="scroll-story__final-logo">
-                <span class="scroll-story__final-title">THE REAL</span>
-                <span class="scroll-story__final-title scroll-story__final-title--big">AMERICANS</span>
-              </div>
-              <p class="scroll-story__panel-text scroll-story__panel-text--tagline">COMING SOON</p>
-              <div class="scroll-story__cta">
-                <a href="#hero" class="btn btn--primary btn--lg">Back to Top</a>
-              </div>
-            </div>
-          </div>
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final-cta">
+      <div class="final-cta__inner">
+        <div class="final-cta__logo">
+          <span class="final-cta__line1">THE REAL</span>
+          <span class="final-cta__line2">AMERICANS</span>
         </div>
+        <p class="final-cta__tagline">COMING SOON</p>
+        <a href="#hero" class="btn btn--primary btn--lg final-cta__btn">Back to Top</a>
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ============ FOOTER ============ -->
     <footer class="footer">
       <div class="footer__content">
         <div class="footer__brand">
