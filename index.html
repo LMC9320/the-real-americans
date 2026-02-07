@@ -86,16 +86,9 @@
     <!-- ============ VIDEO SCRUB SECTION ============ -->
     <section id="video-scrub" class="video-scrub">
       <div class="video-scrub__container">
-        <!-- Placeholder canvas for scroll-scrub (replace with actual video) -->
-        <video
-          class="video-scrub__video"
-          muted
-          playsinline
-          preload="auto"
-        >
+        <video class="video-scrub__video" muted playsinline preload="auto">
           <!-- Drop your trailer MP4 here: <source src="/videos/trailer.mp4" type="video/mp4" /> -->
         </video>
-        <!-- Fallback animated gradient when no video is present -->
         <div class="video-scrub__fallback">
           <div class="video-scrub__fallback-inner">
             <div class="video-scrub__scene video-scrub__scene--1">
@@ -173,7 +166,29 @@
       <p class="characters-intro__sub">The family that fights together, survives together. Scroll to meet each member.</p>
     </section>
 
-    <!-- ============ CHARACTER: COODLES ============ -->
+    <!-- ===============================================================
+         CHARACTER ZONES — GTA 6 STYLE
+         Each character = [Video Section] → [Content Section]
+         Video pins & scrubs, then fades to reveal content underneath
+         =============================================================== -->
+
+    <!-- ======= COODLES ======= -->
+    <section class="char-video" data-char-video="coodles" style="--accent: #ff6b9d; --accent-dark: #c94b7a;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/coodles.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">SMILING BADASS SIS</span>
+            <span class="char-video__name">COODLES</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section" data-character="coodles" style="--accent: #ff6b9d; --accent-dark: #c94b7a;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -189,7 +204,6 @@
             <span class="char-section__anim-icon">&#9654;</span>
             <span>Smile holds a beat too long. Alien blood slowly drips in background.</span>
           </div>
-          <!-- Inline image (text-side) -->
           <div class="char-section__inline-img char-section__img--from-left">
             <div class="char-section__img-placeholder" style="background: linear-gradient(135deg, #ff6b9d 0%, #c94b7a 100%); aspect-ratio: 4/3;">
               <span>Mid-firefight selfie pose</span>
@@ -211,7 +225,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: JIMBO JR ============ -->
+    <!-- ======= JIMBO JR ======= -->
+    <section class="char-video" data-char-video="jimbo-jr" style="--accent: #4a9eff; --accent-dark: #2d6bc4;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/jimbo-jr.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">HOTHEAD OLDER BRO</span>
+            <span class="char-video__name">JIMBO JR</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section char-section--reverse" data-character="jimbo-jr" style="--accent: #4a9eff; --accent-dark: #2d6bc4;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -248,7 +278,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: JIMBOB ============ -->
+    <!-- ======= JIMBOB ======= -->
+    <section class="char-video" data-char-video="jimbob" style="--accent: #ff8c42; --accent-dark: #c4692d;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/jimbob.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">MEATHEAD DAD</span>
+            <span class="char-video__name">JIMBOB</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section" data-character="jimbob" style="--accent: #ff8c42; --accent-dark: #c4692d;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -285,7 +331,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: GRANNY BETTY ============ -->
+    <!-- ======= GRANNY BETTY ======= -->
+    <section class="char-video" data-char-video="granny-betty" style="--accent: #e85d75; --accent-dark: #b8445a;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/granny-betty.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">BOOMER KAREN</span>
+            <span class="char-video__name">GRANNY BETTY</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section char-section--reverse" data-character="granny-betty" style="--accent: #e85d75; --accent-dark: #b8445a;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -322,7 +384,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: PAPPY MERLE ============ -->
+    <!-- ======= PAPPY MERLE ======= -->
+    <section class="char-video" data-char-video="pappy-merle" style="--accent: #c9a227; --accent-dark: #8b6914;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/pappy-merle.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">CONSPIRACY GRANDPA</span>
+            <span class="char-video__name">PAPPY MERLE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section" data-character="pappy-merle" style="--accent: #c9a227; --accent-dark: #8b6914;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -359,7 +437,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: PETE PEREZ ============ -->
+    <!-- ======= PETE PEREZ ======= -->
+    <section class="char-video" data-char-video="pete-perez" style="--accent: #9b59b6; --accent-dark: #7d3f94;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/pete-perez.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">ANGRY WEAPONS NERD</span>
+            <span class="char-video__name">PETE PEREZ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section char-section--reverse" data-character="pete-perez" style="--accent: #9b59b6; --accent-dark: #7d3f94;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -396,7 +490,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: SUSAN ============ -->
+    <!-- ======= SUSAN ======= -->
+    <section class="char-video" data-char-video="susan" style="--accent: #2ecc71; --accent-dark: #229954;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/susan.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">DRUNK ALIEN LIABILITY</span>
+            <span class="char-video__name">SUSAN</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section" data-character="susan" style="--accent: #2ecc71; --accent-dark: #229954;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">
@@ -433,7 +543,23 @@
       </div>
     </section>
 
-    <!-- ============ CHARACTER: TIBERIUS ============ -->
+    <!-- ======= TIBERIUS ZORILLO ======= -->
+    <section class="char-video" data-char-video="tiberius" style="--accent: #f39c12; --accent-dark: #d4860e;">
+      <div class="char-video__wrapper">
+        <video class="char-video__el" muted playsinline preload="auto">
+          <!-- <source src="/videos/tiberius.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="char-video__fallback">
+          <div class="char-video__gradient"></div>
+          <div class="char-video__particles"></div>
+          <div class="char-video__text">
+            <span class="char-video__role">DO NOT PET</span>
+            <span class="char-video__name">TIBERIUS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="char-section char-section--reverse" data-character="tiberius" style="--accent: #f39c12; --accent-dark: #d4860e;">
       <div class="char-section__bg"></div>
       <div class="char-section__content">

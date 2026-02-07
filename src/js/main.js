@@ -1,13 +1,13 @@
 /* ============================================
    THE REAL AMERICANS - MVR STUDIOS
    GTA 6 Inspired — GSAP + Lenis
-   Scroll-Scrub Video + Character Image Fly-in
+   Per-Character Video Scrub + Fade-to-Reveal
+   Based on JSM GTA VI Landing Pattern
    ============================================ */
 
 import '../styles/main.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,33 +165,30 @@ function initMouseParallax() {
 }
 
 /* ============================================
-   VIDEO SCRUB — GTA 6 STYLE
+   MAIN VIDEO SCRUB — GTA 6 STYLE
    Pinned section, scroll maps to video.currentTime
    Falls back to text scenes when no video source
    ============================================ */
 function initVideoScrub() {
   const video = document.querySelector('.video-scrub__video');
-  const container = document.querySelector('.video-scrub__container');
   const fallback = document.querySelector('.video-scrub__fallback');
   const scenes = document.querySelectorAll('.video-scrub__scene');
   const ringFill = document.querySelector('.video-scrub__ring-fill');
   const ringText = document.querySelector('.video-scrub__progress-text');
-  const circumference = 2 * Math.PI * 45; // r=45
+  const circumference = 2 * Math.PI * 45;
 
   const hasVideo = video && video.querySelector('source');
 
-  // Create the main scroll-scrub timeline
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.video-scrub',
       start: 'top top',
-      end: '+=200%',         // 200vh of scroll distance
+      end: '+=200%',
       scrub: true,
       pin: true,
       anticipatePin: 1,
       onUpdate: (self) => {
         const p = self.progress;
-        // Update progress ring
         if (ringFill) {
           ringFill.style.strokeDashoffset = circumference - (p * circumference);
         }
@@ -203,7 +200,6 @@ function initVideoScrub() {
   });
 
   if (hasVideo) {
-    // Real video scrub: map scroll to currentTime
     video.classList.add('is-ready');
     if (fallback) fallback.style.display = 'none';
 
@@ -215,37 +211,32 @@ function initVideoScrub() {
       });
     });
   } else {
-    // Fallback: animate through text scenes
     if (video) video.style.display = 'none';
 
     const totalScenes = scenes.length;
     if (totalScenes > 0) {
       scenes[0].classList.add('is-active');
 
-      // Scene 1: visible from 0% to 33%
-      tl.to({}, { duration: 1 }); // hold scene 1
+      tl.to({}, { duration: 1 });
 
-      // Crossfade to scene 2 at 33%
       tl.call(() => {
         scenes.forEach((s) => s.classList.remove('is-active'));
         scenes[1].classList.add('is-active');
       });
       tl.from(scenes[1], { opacity: 0, scale: 0.95, duration: 0.5 });
-      tl.to({}, { duration: 0.8 }); // hold scene 2
+      tl.to({}, { duration: 0.8 });
 
-      // Crossfade to scene 3 at 66%
       if (scenes[2]) {
         tl.call(() => {
           scenes.forEach((s) => s.classList.remove('is-active'));
           scenes[2].classList.add('is-active');
         });
         tl.from(scenes[2], { opacity: 0, scale: 0.95, duration: 0.5 });
-        tl.to({}, { duration: 0.8 }); // hold scene 3
+        tl.to({}, { duration: 0.8 });
       }
     }
   }
 
-  // Fade hero as video section enters
   tl.to('.hero', { opacity: 0, duration: 0.5, ease: 'power1.inOut' }, 0);
 }
 
@@ -253,7 +244,6 @@ function initVideoScrub() {
    SYNOPSIS ANIMATIONS
    ============================================ */
 function initSynopsis() {
-  // Pull synopsis up slightly to overlap
   gsap.set('.synopsis', { marginTop: '-10vh' });
 
   const synopsisTl = gsap.timeline({
@@ -273,8 +263,102 @@ function initSynopsis() {
 }
 
 /* ============================================
-   CHARACTERS — GTA 6 STYLE
+   CHARACTER VIDEO SCRUB SECTIONS
+   JSM GTA VI Pattern:
+   - Video section gets negative marginTop + starts opacity 0
+   - Pinned and scrubs video (or fallback)
+   - Fades in from 0 to 1 during first part of scroll
+   - Content section has negative marginTop (sits BEHIND pinned video)
+   - Content section triggers fade of the video wrapper to opacity 0
+   - This reveals the character content underneath
+   ============================================ */
+function initCharacterVideos() {
+  const charVideoSections = document.querySelectorAll('.char-video');
+
+  charVideoSections.forEach((section, i) => {
+    const wrapper = section.querySelector('.char-video__wrapper');
+    const video = section.querySelector('.char-video__el');
+    const hasSource = video && video.querySelector('source');
+    const fallback = section.querySelector('.char-video__fallback');
+    const fallbackText = section.querySelector('.char-video__text');
+    const charId = section.dataset.charVideo;
+    const contentSection = document.querySelector(`.char-section[data-character="${charId}"]`);
+
+    // === POSITION: negative marginTop so video overlaps previous section ===
+    // First video overlaps characters-intro header
+    // Subsequent videos overlap the previous character content section
+    const videoMarginTop = i === 0 ? '-100vh' : '-30vh';
+    gsap.set(section, { marginTop: videoMarginTop, opacity: 0 });
+
+    // Content section sits BEHIND the pinned video via negative marginTop
+    if (contentSection) {
+      gsap.set(contentSection, { marginTop: '-80vh' });
+    }
+
+    // Hide actual video if no source, show fallback
+    if (!hasSource) {
+      if (video) video.style.display = 'none';
+    } else {
+      if (fallback) fallback.style.display = 'none';
+      video.classList.add('is-visible');
+    }
+
+    // === PIN + SCRUB the video section ===
+    const videoTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: '+=200%',
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+      },
+    });
+
+    // Phase 1: Fade the video section in from opacity 0 to 1
+    videoTl.to(section, { opacity: 1, duration: 0.3, ease: 'power1.in' });
+
+    if (hasSource) {
+      // Phase 2: Scrub the actual video
+      video.addEventListener('loadedmetadata', () => {
+        videoTl.to(video, {
+          currentTime: video.duration,
+          duration: 2.5,
+          ease: 'none',
+        });
+      });
+    } else {
+      // Phase 2 (fallback): Animate the character name/role text
+      videoTl.fromTo(fallbackText,
+        { scale: 1.4, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, ease: 'power2.out' },
+        '-=0.1'
+      );
+      // Hold the text visible
+      videoTl.to({}, { duration: 1.2 });
+    }
+
+    // === FADE OUT video when content section scrolls into view ===
+    // This is the key reveal effect: video goes transparent, content appears behind it
+    if (contentSection) {
+      gsap.to(wrapper, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: contentSection,
+          start: 'top 85%',
+          end: 'top 15%',
+          scrub: true,
+        },
+      });
+    }
+  });
+}
+
+/* ============================================
+   CHARACTERS CONTENT — GTA 6 STYLE
    Image fly-ins + parallax on img-box
+   (Content sections sit behind pinned video,
+   revealed when video fades to opacity 0)
    ============================================ */
 function initCharacters() {
   // Characters intro header
@@ -287,11 +371,10 @@ function initCharacters() {
     scrollTrigger: { trigger: '.characters-intro', start: 'top 75%', toggleActions: 'play none none reverse' },
   });
 
-  // Each character section
+  // Each character content section
   const charSections = document.querySelectorAll('.char-section');
 
   charSections.forEach((section) => {
-    const text = section.querySelector('.char-section__text');
     const imgBox = section.querySelector('.char-section__images');
     const flyInImages = section.querySelectorAll('[class*="img--from-"]');
     const role = section.querySelector('.char-section__role');
@@ -331,7 +414,7 @@ function initCharacters() {
       });
     });
 
-    // === Parallax on img-box (GTA 6 pattern) ===
+    // === Parallax on img-box (GTA 6 pattern: y -300) ===
     if (imgBox) {
       gsap.to(imgBox, {
         y: -300,
@@ -446,7 +529,8 @@ function init() {
   requestAnimationFrame(() => {
     initVideoScrub();
     initSynopsis();
-    initCharacters();
+    initCharacterVideos();  // Video scrub sections (must come before initCharacters)
+    initCharacters();       // Character content sections
     initWorld();
     initFinalCTA();
     initBackToTop();
