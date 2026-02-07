@@ -5,14 +5,6 @@ export default defineConfig({
     outDir: 'dist',
     minify: 'esbuild',
     cssMinify: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          gsap: ['gsap'],
-          lenis: ['lenis'],
-        },
-      },
-    },
   },
   server: {
     port: 3000,
